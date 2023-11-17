@@ -7,7 +7,7 @@
 # Examples:
 #
 
-Book.create(
+Book.find_or_create_by(
   title:'Kubernetes Up & Running',
   description: """
     In just five years, Kubernetes has radically changed the way developers and ops personnel build, deploy, and maintain applications in the cloud.
@@ -20,7 +20,7 @@ Book.create(
   price: '54,72'
 )
 
-Book.create(
+Book.find_or_create_by(
   title: 'Creating Software with Modern Diagramming Techniques',
   description: """
     Diagrams communicate relationships more directly and clearly than words ever can.
@@ -31,7 +31,7 @@ Book.create(
   price: '27,38'
 )
 
-Book.create(
+Book.find_or_create_by(
   title:"Programming Phoenix Liveview",
   description: """
     The days of the traditional request-response web application are long gone, but you don't have to wade through oceans of JavaScript to build the interactive applications today's users crave.
