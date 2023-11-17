@@ -5,7 +5,7 @@ class Book < ApplicationRecord
     thriller: 2,
     horror_fiction: 3,
     finances: 4,
-    self_help: 5
+    productivity: 5,
   }
 
   validates :title, :price, :cover_url, presence: true
