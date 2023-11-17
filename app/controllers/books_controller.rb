@@ -50,7 +50,21 @@ class BooksController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    result = DestroyBook.new(params[:id]).perform
+
+    if result.success?
+      respond_to do |format|
+        format.json { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.json do
+          render json: { errors: result.book.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+    end
+  end
 
   private
 

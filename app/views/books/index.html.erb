@@ -23,7 +23,7 @@
 										<%= link_to('Edit', edit_book_path(book), class: 'hover:underline') %>
 									</li>
 									<li>
-										<%= link_to('Destroy', book, class: 'hover:underline') %>
+										<%= button_to('Destroy', book_path(book), method: :delete, class: 'hover:underline') %>
 									</li>
 								</ul>
 							</td>
