@@ -7,4 +7,7 @@ class Book < ApplicationRecord
     finances: 4,
     self_help: 5
   }
+
+  validates :title, :price, :cover_url, presence: true
+  validates :price, numericality: { greater_than: 0 }
 end
