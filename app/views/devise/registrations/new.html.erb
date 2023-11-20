@@ -1,0 +1,37 @@
+<div class='w-1/2 mx-auto'>
+  <h1 class='font-bold text-5xl pb-8'>Registration</h1>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render 'devise/shared/error_messages', resource: resource %>
+    <div class='my-5 w-full'>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name, autofocus: true, autocomplete: 'first-name', class: 'block shadow rounded-md w-full' %>
+    </div>
+
+    <div class='my-5 w-full'>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, autofocus: true, autocomplete: 'last-name', class: 'block shadow rounded-md w-full' %>
+    </div>
+
+    <div class='my-5 w-full'>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'block shadow rounded-md w-full' %>
+    </div>
+
+    <div class='my-5 w-full'>
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: 'new-password', class: 'block shadow rounded-md w-full' %>
+    </div>
+
+    <div class='my-5 w-full'>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'block shadow rounded-md w-full' %>
+    </div>
+
+    <div class='pt-8'>
+      <%= f.submit 'Sign up', class: 'rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium cursor-pointer' %>
+  <% end %>
+</div>

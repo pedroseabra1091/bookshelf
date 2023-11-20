@@ -1,0 +1,14 @@
+ <% if user_signed_in? %>
+  <nav class="container mx-auto mt-8 px-5 flex items-center">
+    <h1 class='font-bold text-2xl'>Bookshelf</h1>
+    <div class='w-full flex gap-x-4 justify-end'>
+      <div class='flex'>
+        <%= image_tag('user.svg', class: 'pr-1') %>
+        <span><%= current_user.first_name %></span>
+      </div>
+      <%= link_to(destroy_user_session_path) do %>
+        <%= image_tag('log-out.svg') %>
+      <% end %>
+    </div>
+  </nav>
+<% end %>

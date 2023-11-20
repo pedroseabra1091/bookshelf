@@ -1,20 +1,16 @@
-<div class="w-full">
-		<div class="flex justify-between items-center pb-8">
-			<h1 class="mx-auto font-bold text-5xl">Bookstore</h1>
-		</div>
-
-		<table class="mx-auto">
+<div class='w-full'>
+		<table class='mx-auto'>
 			<tbody>
 				<% @books.each do |book| %>
-						<tr class="<%= cycle("bg-violet-50", "bg-white") %>">
-							<td class="px-2 py-3">
+						<tr class='<%= cycle('bg-violet-50', 'bg-white') %>'>
+							<td class='px-2 py-3'>
 								<%= image_tag(book.cover_url, class: 'w-40') %>
 							</td>
 							<td>
-							  <h1 class="text-xl font-bold mb-3"><%= book.title %></h1>
+							  <h1 class='text-xl font-bold mb-3'><%= book.title %></h1>
 								<p><%= truncate(book.description, length: 80) %></p>
 							</td>
-							<td class="px-3">
+							<td class='px-3'>
 								<ul>
 									<li>
 										<%= link_to('Show', book_path(book), class: 'hover:underline') %>
@@ -32,10 +28,10 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3">
-							<div class="m-8">
+						<td colspan='3'>
+							<div class='m-8'>
 								<%= link_to('New book',new_book_path,
-														class: "inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium") %>
+														class: 'inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium') %>
 							</div>
 						</td>
 					</tr>

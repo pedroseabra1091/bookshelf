@@ -1,25 +1,25 @@
 <%= form_with(model: @book) do |form| %>
   <div class="my-5 w-full">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "block shadow rounded-md w-full" %>
+    <%= form.text_field :title, class: 'block shadow rounded-md w-full' %>
   </div>
-  <div class="my-5 w-full">
+  <div class='my-5 w-full'>
     <%= form.label :genre %>
-    <%= form.select :genre, formatted_genres, {}, { class: 'block shadow rounded-md w-full', selected: true} %>
+    <%= form.select :genre, formatted_genres, {}, { class: 'block shadow rounded-md w-full', selected: true } %>
   </div>
-  <div class="my-5 w-full">
+  <div class='my-5 w-full'>
     <%= form.label :description %>
     <%= form.text_area :description, rows: 10, class: "block shadow w-full" %>
   </div>
-  <div class="my-5 w-full">
+  <div class='my-5 w-full'>
     <%= form.label :cover_url %>
-    <%= form.text_field :cover_url, class: "block shadow rounded-md w-full" %>
+    <%= form.text_field :cover_url, class: 'block shadow rounded-md w-full' %>
   </div>
-  <div class="my-5 w-full">
+  <div class='my-5 w-full'>
     <%= form.label :price %>
-    <%= form.number_field :price, class: "block shadow rounded-md w-full", step: 0.01 %>
+    <%= form.number_field :price, class: 'block shadow rounded-md w-full', step: 0.01 %>
   </div>
-  <div class="pt-8">
-    <%= form.submit class: "inline rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium cursor-pointer" %>
+  <div class='pt-8'>
+    <%= form.submit class: 'rounded-lg py-3 px-5 bg-blue-600 text-white font-medium cursor-pointer' %>
   </div>
 <% end %>

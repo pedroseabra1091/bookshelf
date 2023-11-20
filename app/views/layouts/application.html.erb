@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookstore</title>
+    <title>Bookshelf</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <%= render 'shared/navbar' %>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
