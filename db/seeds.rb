@@ -16,8 +16,7 @@ Book.find_or_create_by(
     Software developers, engineers, and architects will learn ways to use tools and APIs to automate scalable distributed systems for online services, machine learning applications, or even a cluster of Raspberry Pi computers.
     This guide shows you how to: Create a simple cluster to learn how Kubernetes works Dive into the details of deploying an application using Kubernetes Learn specialized objects in Kubernetes, such as DaemonSets, jobs, ConfigMaps, and secrets Explore deployments that tie together the lifecycle of a complete application Get practical examples of how to develop and deploy real-world applications in Kubernetes
   """,
-  cover_url: 'https://m.media-amazon.com/images/I/81fH7yJ8rsL._SL1500_.jpg',
-  price: '54,72'
+  cover_url: 'https://m.media-amazon.com/images/I/81fH7yJ8rsL._SL1500_.jpg'
 )
 
 Book.find_or_create_by(
@@ -27,8 +26,7 @@ Book.find_or_create_by(
     Using only text-based markup, create meaningful and attractive diagrams to document your domain, visualize user flows, reveal system architecture at any desired level, or refactor your code.
     With the tools and techniques this book will give you, you'll create a wide variety of diagrams in minutes, share them with others, and revise and update them immediately on the basis of feedback.
   """,
-  cover_url: 'https://m.media-amazon.com/images/I/81Qu4QCh0PL._SL1500_.jpg',
-  price: '27,38'
+  cover_url: 'https://m.media-amazon.com/images/I/81Qu4QCh0PL._SL1500_.jpg'
 )
 
 Book.find_or_create_by(
@@ -39,6 +37,5 @@ Book.find_or_create_by(
     Learn to think in LiveView. Write your code layer by layer, the way the experts do.
     Explore techniques with experienced teachers to get the best possible performance.
   """,
-  cover_url: 'https://m.media-amazon.com/images/I/81KtOhfPCjL._SL1500_.jpg',
-  price: '48,62'
+  cover_url: 'https://m.media-amazon.com/images/I/81KtOhfPCjL._SL1500_.jpg'
 )

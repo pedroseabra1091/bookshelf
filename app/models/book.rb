@@ -8,6 +8,5 @@ class Book < ApplicationRecord
     productivity: 5,
   }
 
-  validates :title, :price, :cover_url, presence: true
-  validates :price, numericality: { greater_than: 0 }
+  validates :title, :cover_url, presence: true
 end

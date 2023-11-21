@@ -10,8 +10,7 @@ RSpec.describe CreateBook do
           title: FFaker::Book.title,
           genre: Book.genres.keys.sample,
           description: FFaker::Book.description,
-          cover_url: FFaker::Book.cover,
-          price: FFaker::Number.decimal
+          cover_url: FFaker::Book.cover
         }
       end
 
@@ -23,7 +22,6 @@ RSpec.describe CreateBook do
           expect(Book.last.genre).to eq(book_params[:genre])
           expect(Book.last.description).to eq(book_params[:description])
           expect(Book.last.cover_url).to eq(book_params[:cover_url])
-          expect(Book.last.price).to eq(book_params[:price])
         end
       end
     end
@@ -34,12 +32,11 @@ RSpec.describe CreateBook do
           title: nil,
           genre: Book.genres.keys.sample,
           description: FFaker::Book.description,
-          cover_url: nil,
-          price: -10.50
+          cover_url: nil
         }
       end
       let(:expected_error_messages) do
-        ["Title can't be blank", "Cover url can't be blank", "Price must be greater than 0"]
+        ["Title can't be blank", "Cover url can't be blank"]
       end
 
       it 'does not create a book' do

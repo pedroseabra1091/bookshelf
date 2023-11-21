@@ -4,6 +4,5 @@ FactoryBot.define do
     genre { Book.genres.keys.sample }
     description { FFaker::Book.description }
     cover_url { FFaker::Book.cover }
-    price { FFaker::Number.decimal }
   end
 end
