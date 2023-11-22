@@ -1,6 +1,8 @@
  <% if user_signed_in? %>
   <nav class="container mx-auto mt-8 px-5 flex items-center">
-    <h1 class='font-bold text-2xl'>Bookshelf</h1>
+    <%= link_to(books_path) do %>
+      <h1 class='font-bold text-2xl'>Bookshelf</h1>
+    <% end %>
     <div class='w-full flex gap-x-4 justify-end'>
       <div class='flex'>
         <%= image_tag('user.svg', class: 'pr-1') %>

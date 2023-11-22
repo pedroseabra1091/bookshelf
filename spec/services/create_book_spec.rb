@@ -43,7 +43,7 @@ RSpec.describe CreateBook do
         aggregate_failures do
           expect { create_book }.not_to change(Book, :count)
           expect(create_book.success?).to eq(false)
-          expect(create_book.book.errors.full_messages).to eq(expected_error_messages)
+          expect(create_book.errors).to eq(expected_error_messages)
         end
       end
     end

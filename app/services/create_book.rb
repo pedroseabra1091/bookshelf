@@ -1,5 +1,5 @@
 class CreateBook
-  Result = Struct.new(:success?, :book, :error, keyword_init: true)
+  Result = Struct.new(:success?, :book, :errors, keyword_init: true)
 
   def initialize(book_params)
     @book_params = book_params
@@ -10,6 +10,6 @@ class CreateBook
 
     Result.new({ success?: true, book: book })
   rescue ActiveRecord::RecordInvalid => error
-    Result.new({ success?: false, book: error.record })
+    Result.new({ success?: false, errors: error.record.errors.full_messages })
   end
 end

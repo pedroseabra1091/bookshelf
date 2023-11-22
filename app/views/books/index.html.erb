@@ -7,14 +7,13 @@
 								<%= image_tag(book.cover_url, class: 'w-40') %>
 							</td>
 							<td>
-							  <h1 class='text-xl font-bold mb-3'><%= book.title %></h1>
+								<%= link_to(book_path(book)) do %>
+							  	<h1 class='text-xl font-bold mb-3 hover:underline'><%= book.title %></h1>
+								<% end %>
 								<p><%= truncate(book.description, length: 80) %></p>
 							</td>
 							<td class='px-3'>
 								<ul>
-									<li>
-										<%= link_to('Show', book_path(book), class: 'hover:underline') %>
-									</li>
 									<li>
 										<%= link_to('Edit', edit_book_path(book), class: 'hover:underline') %>
 									</li>

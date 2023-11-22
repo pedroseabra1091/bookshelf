@@ -3,7 +3,8 @@ en:
     errors:
       models:
         reservation:
-          already_reserved: 'book is already reserved'
+          book_already_reserved: 'book is already reserved'
+          user_has_reservations: 'user already has a active reservation'
           attributes:
             returned_on:
               past_date: 'cannot be set in the past'

@@ -39,7 +39,7 @@ RSpec.describe UpdateBook do
 
         aggregate_failures do
           expect(update_book.success?).to eq(false)
-          expect(update_book.book.errors.full_messages.first).to eq("Title can't be blank")
+          expect(update_book.errors.first).to eq("Title can't be blank")
         end
       end
     end

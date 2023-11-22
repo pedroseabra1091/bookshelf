@@ -1,11 +1,13 @@
 class Book < ApplicationRecord
   enum genre: {
     software_engineering: 0,
-    science_fiction: 1,
-    thriller: 2,
-    horror_fiction: 3,
-    finances: 4,
-    productivity: 5,
+    design: 1,
+    project_management: 2,
+    rails: 3,
+    android: 4,
+    ios: 5,
+    finances: 6,
+    productivity: 7,
   }
 
   has_many :reservations, dependent: :destroy

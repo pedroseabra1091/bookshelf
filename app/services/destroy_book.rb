@@ -10,7 +10,7 @@ class DestroyBook
     book.destroy!
 
     Result.new({ success?: true, book: book })
-  rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid => error
+  rescue ActiveRecord::RecordNotFound
     Result.new({ success?: false })
   end
 end
