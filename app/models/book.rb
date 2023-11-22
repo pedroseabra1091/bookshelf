@@ -3,11 +3,14 @@ class Book < ApplicationRecord
     software_engineering: 0,
     design: 1,
     project_management: 2,
-    rails: 3,
-    android: 4,
-    ios: 5,
-    finances: 6,
-    productivity: 7,
+    ruby: 3,
+    rails: 4,
+    elixir: 5,
+    phoenix: 6,
+    android: 7,
+    ios: 8,
+    finances: 9,
+    productivity: 10,
   }
 
   has_many :reservations, dependent: :destroy
@@ -19,6 +22,12 @@ class Book < ApplicationRecord
 
   scope :available, -> { left_joins(:reservations).where('reservations.returned_on IS NOT NULL OR reservations.book_id IS NULL') }
   scope :reserved, -> { joins(:reservations).where(reservations: { returned_on: nil }) }
+
+  def available?
+    return true if reservations.blank?
+
+    reservations.where.not(returned_on: nil).present?
+  end
 
   def reserved?
     reservations.where(returned_on: nil).present?

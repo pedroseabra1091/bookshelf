@@ -7,7 +7,13 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  scope :admin_users, -> { where(is_admin: true) }
+
   def actively_reading?
     active_reading.present?
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

@@ -1,0 +1,6 @@
+<div>
+  <p class="mb-s">Hello <%= @recipient.first_name %>,</p>
+  <p>We wanted to inform you that a book has been reserved on the Bookshelf!</p>
+  <p>The book titled <span class="font-bold"><%= @book.title %></span> has been reserved by <span class="font-bold"><%= @reserver.full_name %></span> at <%= @book.active_reservation.created_at %>.</p>
+  <p class="mt-s">Keep on reading!</p>
+</div>

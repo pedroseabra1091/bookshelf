@@ -26,7 +26,7 @@ class BooksController < ApplicationController
     else
       respond_to do |format|
         format.json do
-          render json: { errors: result.book.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: result.errors }, status: :unprocessable_entity
         end
       end
     end
@@ -50,6 +50,7 @@ class BooksController < ApplicationController
     end
   end
 
+  # TODO: Add turbo
   def destroy
     result = DestroyBook.new(params[:id]).perform
 
@@ -59,8 +60,25 @@ class BooksController < ApplicationController
       end
     else
       respond_to do |format|
+        format.json { head :unprocessable_entity }
+      end
+    end
+  end
+
+  def reserve
+    result = ReserveBook.new(params[:id], current_user.id).perform
+
+    if result.success?
+      respond_to do |format|
+        format.html { redirect_to books_path }
         format.json do
-          render json: { errors: result.book.errors.full_messages }, status: :unprocessable_entity
+          render json: { reservation: result.reservation }, status: :created
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          render json: { errors: result&.errors }, status: :unprocessable_entity
         end
       end
     end
