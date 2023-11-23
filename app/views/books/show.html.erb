@@ -15,9 +15,9 @@
         </div>
       <% else %>
         <div class='flex pt-12'>
-          <%= image_tag('user.svg', class: 'pr-1') %>
+          <%= image_tag('bookmark.svg', class: 'pr-1') %>
           <span>
-            On <%= @book.active_reservation.created_at %>, <span class='font-bold'> <%= @book.active_reader.full_name %> </span> reserved <%= @book.title %>.
+            <span class='font-bold'><%= @book.active_reader.full_name %> </span> reserved <%= @book.title %> on <%= @book.active_reservation.created_at.to_date %>.
           </span>
         </div>
       <% end %>

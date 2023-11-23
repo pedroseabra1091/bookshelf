@@ -15,7 +15,7 @@ class ReserveBook
   rescue ActiveRecord::RecordNotFound
     Result.new({ success?: false })
   rescue ActiveRecord::RecordInvalid => error
-    Result.new({ success?: false, errors: error.record.full_messages })
+    Result.new({ success?: false, errors: error.record.errors.full_messages })
   end
 
   private

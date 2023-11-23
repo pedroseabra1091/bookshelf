@@ -2,7 +2,7 @@
 		<table class='mx-auto'>
 			<tbody>
 				<% @books.each do |book| %>
-						<tr class='<%= cycle('bg-violet-50', 'bg-white') %>'>
+						<tr class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
 							<td class='px-2 py-3'>
 								<%= image_tag(book.cover_url, class: 'w-40') %>
 							</td>

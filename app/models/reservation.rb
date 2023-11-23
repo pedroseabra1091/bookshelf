@@ -9,6 +9,10 @@ class Reservation < ApplicationRecord
   delegate :reserved?, to: :book, prefix: :book
   delegate :actively_reading?, to: :user, prefix: :user
 
+  def returned?
+    returned_on.present?
+  end
+
   private
 
   def book_cannot_be_double_reserved
