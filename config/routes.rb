@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     post :reserve, on: :member
   end
 
-  resources :reservations, only: [:index]
+  resources :reservations, only: [:index, :update]
 
   root 'books#index'
 end

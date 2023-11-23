@@ -9,7 +9,7 @@ class Book < ApplicationRecord
     phoenix: 6,
     android: 7,
     ios: 8,
-    finances: 9,
+    finance: 9,
     productivity: 10,
   }
 

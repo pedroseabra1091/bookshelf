@@ -5,7 +5,7 @@
     <div class='flex flex-col'>
       <span class='mb-5 text-sm bg-violet-500 text-white p-2 w-fit rounded-2xl shadow'><%= format_genre(@book.genre) %></span>
       <p><%= @book.description %></p>
-      <% if @book.available? %>
+      <% if @book.available? && !@current_user.actively_reading? %>
         <div class='pt-12'>
           <%= button_to(reserve_book_path(@book), class: 'w-full') do %>
             <form method='post'>
@@ -13,7 +13,7 @@
             </form>
           <% end %>
         </div>
-      <% else %>
+      <% elsif @book.reserved? %>
         <div class='flex pt-12'>
           <%= image_tag('bookmark.svg', class: 'pr-1') %>
           <span>

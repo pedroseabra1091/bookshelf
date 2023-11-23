@@ -1,25 +1,26 @@
-<div class='w-2/3 mx-auto'>
-	<h1 class='font-bold text-5xl pb-8'>My reservations</h1>
-	<table class='mt-12 w-full'>
-		<tbody class='grid'>
-			<% @reservations.each do |reservation| %>
-					<tr class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
-						<td class='pr-5'>
-							<%= image_tag(reservation.book.cover_url, class: 'w-40') %>
-						</td>
-						<td>
-							<%= link_to(book_path(reservation.book)) do %>
-								<h1 class='text-xl font-bold mb-3 hover:underline'><%= reservation.book.title %></h1>
-							<% end %>
-							<ul>
-								<li>Reserved on <%= reservation.created_at.to_date %></li>
-								<% if reservation.returned? %>
-									<li>Returned on <%= reservation.returned_on %></li>
-								<% end %>
-							</ul>
-						</td>
-					</tr>
+<div class='mx-auto'>
+	<h1 class='font-bold text-5xl mb-8'>My reservations</h1>
+	<% @reservations.each do |reservation| %>
+		<div class='grid grid-cols-3 <%= cycle('bg-violet-50', 'bg-white') %> p-3 shadow'>
+			<div class='flex items-center justify-start'>
+				<%= link_to book_path(reservation.book) do %>
+					<h1 class='text-xl font-bold hover:underline'><%= reservation.book.title %></h1>
+				<% end %>
+			</div>
+			<div class='flex items-center justify-center'>
+				<%= image_tag('arrow-down.svg', class: 'pr-1') %>
+				<span>Reserved on <%= reservation.created_at.to_date %></span>
+			</div>
+			<% if reservation.returned? %>
+				<div class='flex items-center justify-center'>
+					<%= image_tag('arrow-up.svg', class: 'pr-1') %>
+					<p>Returned on <%= reservation.returned_on %></p>
+				</div>
+			<% else %>
+				<div class='flex items-center justify-center'>
+					<%= button_to('Return book', reservation_path(reservation), method: :put, class: 'hover:underline') %>
+				</div>
 			<% end %>
-			</tbody>
-	</table>
+		</div>
+	<% end %>
 </div>

@@ -9,6 +9,10 @@ class BookMailer < ApplicationMailer
     mail(subject: "New reservation on #{@book.title}")
   end
 
+  def reservation_ending
+    mail(subject: "Reservation ending on #{@book.title}")
+  end
+
   private
 
   def set_recipient
