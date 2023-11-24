@@ -1,5 +1,5 @@
 class DestroyBook
-  Result = Struct.new(:success?, :book, :error, keyword_init: true)
+  Result = Struct.new(:success?, :book, keyword_init: true)
 
   def initialize(book_id)
     @book_id = book_id

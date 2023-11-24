@@ -7,6 +7,7 @@ class Reservation < ApplicationRecord
   validate :returned_on_cannot_be_in_the_past
 
   delegate :reserved?, to: :book, prefix: :book
+  delegate :title, to: :book, prefix: :book
   delegate :actively_reading?, to: :user, prefix: :user
 
   def returned?

@@ -8,13 +8,12 @@ class ReservationsController < ApplicationController
 
     if result.success?
       respond_to do |format|
+        format.html { render :index, status: :ok }
         format.json { render json: { reservation: result.reservation }, status: :ok }
       end
     else
       respond_to do |format|
-        format.json do
-          render json: { errors: result.errors }, status: :unprocessable_entity
-        end
+        format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
     end
   end
@@ -22,6 +21,6 @@ class ReservationsController < ApplicationController
   private
 
   def set_reservations
-    @reservations = current_user.reservations.includes(:book).order(:created_at)
+    @reservations = current_user.reservations.includes(:book).order(created_at: :desc)
   end
 end

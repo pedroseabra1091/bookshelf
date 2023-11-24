@@ -1,5 +1,5 @@
 class ReserveBook
-  Result = Struct.new(:success?, :reservation, :errors, keyword_init: true)
+  Result = Struct.new(:success?, :reservation, :errors, :book, keyword_init: true)
 
   def initialize(book_id, user_id)
     @book_id = book_id
@@ -15,7 +15,7 @@ class ReserveBook
   rescue ActiveRecord::RecordNotFound
     Result.new({ success?: false })
   rescue ActiveRecord::RecordInvalid => error
-    Result.new({ success?: false, errors: error.record.errors.full_messages })
+    Result.new({ success?: false, errors: error.record.errors.full_messages, book: book })
   end
 
   private

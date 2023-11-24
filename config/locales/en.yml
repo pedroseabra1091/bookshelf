@@ -1,10 +1,25 @@
 en:
+  errors:
+    format: '%{attribute} %{message}'
+  books:
+    create:
+      success: '%{title} was successfully added to the collection!'
+    update:
+      success: '%{title} was succesfully updated!'
+    reserve:
+      success: '%{title} was successfully reserved!'
+      failure: '%{errors}'
+  reservations:
+    update:
+      success: '%{title} has made its way back to the collection!'
   activerecord:
     errors:
+      messages:
+        record_invalid: '%{errors}'
       models:
         reservation:
-          book_already_reserved: 'book is already reserved'
-          user_has_reservations: 'user already has a active reservation'
+          book_already_reserved: 'Book is already reserved.'
+          user_has_reservations: 'You already have a ongoing reservation.'
           attributes:
             returned_on:
               past_date: 'cannot be set in the past'

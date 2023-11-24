@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% flash.each do |type, content| %>
+    <% if type == 'notice' %>
+      <div class='flex bg-green-50 w-fit p-3 mb-8 rounded-lg shadow fixed bottom-0 right-8'>
+        <%= image_tag('check-circle.svg', class:'mr-1') %>
+        <p><%= content %></p>
+      </div>
+    <% elsif type == 'alert' %>
+      <div class='fixed bottom-0 right-8'>
+        <% content.each do |message| %>
+          <div class='flex bg-red-50 w-64 p-3 mb-8 rounded-lg shadow'>
+            <%= image_tag('x-circle.svg', class:'mr-1') %>
+            <p><%= message %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.all
+    @books = Book.all.order(created_at: :asc)
   end
 
   def show
@@ -20,14 +20,18 @@ class BooksController < ApplicationController
 
     if result.success?
       respond_to do |format|
-        format.html { redirect_to books_path }
-        format.json { render json: { book: result.product }, status: :created }
+        format.html do
+          redirect_to(books_path, notice: I18.t('books.create.success', title: result.book.title))
+        end
+        format.json { render json: { book: result.book }, status: :created }
       end
     else
       respond_to do |format|
-        format.json do
-          render json: { errors: result.errors }, status: :unprocessable_entity
+        format.html do
+          flash.now[:alert] = result.errors
+          render :new, status: :unprocessable_entity
         end
+        format.json { render json: { errors: result.errors }, status: :unprocessable_entity }
       end
     end
   end
@@ -38,13 +42,20 @@ class BooksController < ApplicationController
 
     if result.success?
       respond_to do |format|
-        format.html { redirect_to books_path }
-        format.json { render json: { book: result.product }, status: :ok }
+        format.html do
+          redirect_to(books_path, notice: I18n.t('books.update.success', title: result.book.title))
+        end
+        format.json { render json: { book: result.book }, status: :ok }
       end
     else
       respond_to do |format|
+        format.html do
+          flash.now[:alert] = result.errors
+          @book = result.book
+          render :edit, status: :unprocessable_entity
+        end
         format.json do
-          render json: { errors: result.book.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: result&.errors }, status: :unprocessable_entity
         end
       end
     end
@@ -55,13 +66,9 @@ class BooksController < ApplicationController
     result = DestroyBook.new(params[:id]).perform
 
     if result.success?
-      respond_to do |format|
-        format.json { head :ok }
-      end
+      respond_to { |format| format.json { head :ok } }
     else
-      respond_to do |format|
-        format.json { head :unprocessable_entity }
-      end
+      respond_to { |format| format.json { head :unprocessable_entity } }
     end
   end
 
@@ -70,16 +77,19 @@ class BooksController < ApplicationController
 
     if result.success?
       respond_to do |format|
-        format.html { redirect_to books_path }
-        format.json do
-          render json: { reservation: result.reservation }, status: :created
+        format.html do
+          redirect_to(books_path, notice: I18n.t('books.reserve.success', title: result.reservation.book_title))
         end
+        format.json { render json: { reservation: result.reservation }, status: :created }
       end
     else
       respond_to do |format|
         format.html do
-          render json: { errors: result&.errors }, status: :unprocessable_entity
+          @book = result.book
+          flash.now[:alert] = result&.errors
+          render :show, status: :unprocessable_entity
         end
+        format.json { render json: { errors: result&.errors }, status: :unprocessable_entity }
       end
     end
   end
