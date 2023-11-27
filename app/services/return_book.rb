@@ -9,7 +9,7 @@ class ReturnBook
   def perform
     reservation = Reservation.find(@reservation_id)
     reservation.update(returned_on: Date.today)
-    deliver_return_notification(reservation)
+    send_return_notification(reservation)
 
     Result.new({ success?: true, reservation: reservation })
   rescue ActiveRecord::RecordNotFound
@@ -20,11 +20,9 @@ class ReturnBook
 
   private
 
-  def deliver_return_notification(reservation)
+  def send_return_notification(reservation)
     User.admin_users.each do |user|
-      BookMailer.with(reserver: reservation.user, recipient: user, book: reservation.book)
-                .reservation_ending
-                .deliver_now
+      SendEndingReservationEmailJob.perform_async(@user_id, user.id, reservation.book_id)
     end
   end
 end

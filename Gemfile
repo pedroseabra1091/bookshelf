@@ -45,6 +45,10 @@ gem "bootsnap", require: false
 # Standard authentication solution for Rails
 gem "devise", "~> 4.9", "~> 4.9.3"
 
+# Background processing workloads
+gem 'sidekiq', '~> 7.2'
+gem 'sidekiq-cron', '~> 1.11'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", "~> 1.8", platforms: %i[ mri mingw x64_mingw ]

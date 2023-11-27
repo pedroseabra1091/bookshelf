@@ -1,0 +1,4 @@
+enqueue_book_progress_email:
+  cron: '0 8 1 * *'
+  class: 'EnqueueBookProgressEmailJob'
+  queue: 'default'

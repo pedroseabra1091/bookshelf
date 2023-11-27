@@ -1,9 +1,8 @@
-class BookMailer < ApplicationMailer
-  before_action :set_recipient
+class AdminMailer < ApplicationMailer
   before_action :set_reserver
   before_action :set_book
 
-  default to: -> { @recipient.email }
+  default to: -> { User.where(is_admin: true).pluck(:email) }
 
   def new_reservation
     mail(subject: "New reservation on #{@book.title}")
@@ -14,10 +13,6 @@ class BookMailer < ApplicationMailer
   end
 
   private
-
-  def set_recipient
-    @recipient = params[:recipient]
-  end
 
   def set_reserver
     @reserver = params[:reserver]
