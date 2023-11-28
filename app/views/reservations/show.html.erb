@@ -1,0 +1,22 @@
+<turbo-frame id='my_reservations'>
+  <div class='bg-violet-50 shadow h-fit p-6 mb-8 rounded'>
+    <h2 class='font-bold mb-2 text-xl'>You're reading</h2>
+    <div class="bg-white shadow h-fit p-4 my-4 rounded">
+      <%= link_to book_path(@active_reservation.book) do %>
+        <h1 class='text-xl font-bold hover:underline'><%= @active_reservation.book.title %></h1>
+      <% end %>
+      <div class='flex items-center mt-2'>
+        <%= image_tag('arrow-down.svg', class: 'pr-1') %>
+        <span>Reserved on <%= @active_reservation.created_at.to_date %></span>
+      </div>
+      <div class='flex items-center justify-center mt-4 w-full'>
+        <%= button_to(
+          'Return book',
+          reservation_path(@active_reservation),
+          method: :put,
+          form_class: 'w-full',
+          class: 'rounded-lg py-3 px-5 bg-green-600 text-white font-medium cursor-pointer hover:underline w-full') %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

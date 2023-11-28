@@ -10,6 +10,9 @@ class Reservation < ApplicationRecord
   delegate :title, to: :book, prefix: :book
   delegate :actively_reading?, to: :user, prefix: :user
 
+  scope :ongoing, -> { where(returned_on: nil) }
+  scope :finished, -> { where.not(returned: nil) }
+
   def returned?
     returned_on.present?
   end

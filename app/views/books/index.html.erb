@@ -1,39 +1,45 @@
-<div class='w-full'>
-		<table class='mx-auto'>
-			<tbody>
-				<% @books.each do |book| %>
-						<tr class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
-							<td class='px-2 py-3'>
-								<%= image_tag(book.cover_url, class: 'w-40') %>
-							</td>
-							<td>
-								<%= link_to(book_path(book)) do %>
-							  	<h1 class='text-xl font-bold mb-3 hover:underline'><%= book.title %></h1>
-								<% end %>
-								<p><%= truncate(book.description, length: 80) %></p>
-							</td>
-							<td class='px-3'>
-								<ul>
-									<li>
-										<%= link_to('Edit', edit_book_path(book), class: 'hover:underline') %>
-									</li>
-									<li>
-										<%= button_to('Destroy', book_path(book), method: :delete, class: 'hover:underline') %>
-									</li>
-								</ul>
-							</td>
-						</tr>
-				<% end %>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan='3'>
-							<div class='m-8'>
-								<%= link_to('New book',new_book_path,
-														class: 'inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium') %>
-							</div>
+<div class='grid grid-cols-4 gap-10'>
+	<div class='col-span-1'>
+		<% if current_user.active_reservation %>
+			<turbo-frame id='my_reservations' src='<%= reservation_path(current_user.active_reservation.id)%>' target='_top' >
+			</turbo-frame>
+		<% end %>
+		<turbo-frame id='company_reservations' src="/company-reservations" target='_top'>
+		</turbo-frame>
+	</div>
+	<table class="col-span-3">
+		<tbody>
+			<% @books.each do |book| %>
+					<tr class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
+						<td class='px-2 py-3'>
+							<%= image_tag(book.cover_url, class: 'w-40') %>
+						</td>
+						<td>
+							<%= link_to(book_path(book)) do %>
+								<h1 class='text-xl font-bold mb-3 hover:underline'><%= book.title %></h1>
+							<% end %>
+							<p class="max-w-xl"><%= truncate(book.description, length: 200) %></p>
+						</td>
+						<td>
+							<ul>
+								<li>
+									<%= link_to('Edit', edit_book_path(book), class: 'hover:underline') %>
+								</li>
+								<li>
+									<%= button_to('Destroy', book_path(book), method: :delete, class: 'hover:underline') %>
+								</li>
+							</ul>
 						</td>
 					</tr>
-				</tfoot>
-		</table>
+			<% end %>
+			</tbody>
+			<tfoot>
+				<td>
+					<div class="my-8">
+						<%= link_to('New book',new_book_path,
+												class: 'inline rounded-lg py-3 px-5 bg-green-600 text-white block font-medium') %>
+					</div>
+				</td>
+			</tfoot>
+	</table>
 </div>

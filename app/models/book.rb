@@ -26,10 +26,12 @@ class Book < ApplicationRecord
   def available?
     return true if reservations.blank?
 
-    reservations.where.not(returned_on: nil).present?
+    reservations.last.returned_on.present?
   end
 
   def reserved?
-    reservations.where(returned_on: nil).present?
+    return false if reservations.blank?
+
+    reservations.last.returned_on.blank?
   end
 end

@@ -5,20 +5,20 @@
     <div class='flex flex-col'>
       <span class='mb-5 text-sm bg-violet-500 text-white p-2 w-fit rounded-2xl shadow'><%= format_genre(@book.genre) %></span>
       <p><%= @book.description %></p>
-      <% if @book.available? && !@current_user.actively_reading? %>
+      <% if @book.reserved? %>
+        <div class='flex pt-12'>
+          <%= image_tag('bookmark.svg', class: 'pr-1') %>
+          <span>
+            <span class='font-bold'><%= @book.active_reader.full_name %> </span> reserved <%= @book.title %> on <%= @book.active_reservation.created_at.to_date %>.
+          </span>
+        </div>
+      <% elsif @book.available? && !current_user.actively_reading? %>
         <div class='pt-12'>
           <%= button_to(reserve_book_path(@book), class: 'w-full') do %>
             <form method='post'>
               <input value="Reserve book" type="submit" class='w-full rounded-lg py-3 px-5 bg-green-600 text-white font-medium cursor-pointer' />
             </form>
           <% end %>
-        </div>
-      <% elsif @book.reserved? %>
-        <div class='flex pt-12'>
-          <%= image_tag('bookmark.svg', class: 'pr-1') %>
-          <span>
-            <span class='font-bold'><%= @book.active_reader.full_name %> </span> reserved <%= @book.title %> on <%= @book.active_reservation.created_at.to_date %>.
-          </span>
         </div>
       <% end %>
     </div>
