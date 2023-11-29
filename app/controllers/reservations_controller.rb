@@ -1,21 +1,19 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservations, on: [:index]
-  before_action :set_active_reservation, on: [:show]
+  before_action :set_reservations, only: [:index]
+  before_action :set_active_reservation, only: [:show, :update]
 
   def index; end
 
   def show; end
 
+  # TODO: Update errors to use turbo frames
   def update
-    result = ReturnBook.new(params[:id], current_user.id).perform
+    result = ReturnBook.new(@active_reservation).perform
 
     if result.success?
       respond_to do |format|
-        format.html { render :index, status: :ok }
+        format.turbo_stream
         format.json { render json: { reservation: result.reservation }, status: :ok }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove("my_reservations")
-        end
       end
     else
       respond_to do |format|
@@ -31,6 +29,6 @@ class ReservationsController < ApplicationController
   end
 
   def set_active_reservation
-    @active_reservation = Reservation.where(user: current_user, returned_on: nil).last
+    @active_reservation = current_user.active_reservation
   end
 end
