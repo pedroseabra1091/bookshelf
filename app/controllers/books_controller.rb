@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     if result.success?
       respond_to do |format|
         format.html do
-          redirect_to(books_path, notice: I18.t('books.create.success', title: result.book.title))
+          redirect_to(books_path, notice: I18n.t('books.create.success', title: result.book.title))
         end
         format.json { render json: { book: result.book }, status: :created }
       end
@@ -61,12 +61,16 @@ class BooksController < ApplicationController
     end
   end
 
-  # TODO: Add turbo
   def destroy
     result = DestroyBook.new(params[:id]).perform
 
     if result.success?
-      respond_to { |format| format.json { head :ok } }
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.remove("book_#{params[:id]}_row")
+        end
+        format.json { head :ok }
+      end
     else
       respond_to { |format| format.json { head :unprocessable_entity } }
     end
