@@ -6,7 +6,7 @@ class ReturnBook
   end
 
   def perform
-    reservation.update!(returned_on: Date.today, user: nil)
+    reservation.update!(returned_on: Date.today)
     send_return_notification(reservation)
 
     Result.new({ success?: true, reservation: reservation })

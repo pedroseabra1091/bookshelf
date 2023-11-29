@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UpdateBook do
   let(:book) { create(:book) }
-  let(:update_book) { described_class.new(book.id, book_params).perform }
+  let(:update_book) { described_class.new(book, book_params).perform }
 
   describe '#perform' do
     context 'when params are valid' do

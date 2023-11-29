@@ -1,16 +1,19 @@
 class DestroyBook
   Result = Struct.new(:success?, :book, keyword_init: true)
 
-  def initialize(book_id)
-    @book_id = book_id
+  def initialize(book)
+    @book = book
   end
 
   def perform
-    book = Book.find_by!(id: @book_id)
     book.destroy!
 
     Result.new({ success?: true, book: book })
   rescue ActiveRecord::RecordNotFound
     Result.new({ success?: false })
   end
+
+  private
+
+  attr_accessor :book
 end

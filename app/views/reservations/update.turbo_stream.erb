@@ -1,0 +1,2 @@
+<%= turbo_stream.remove('active_reservation_badge') %>
+<%= turbo_stream.update("#{dom_id(@active_reservation)}_row", locals: { reservation: @active_reservation }, partial: 'reservations/row') %>

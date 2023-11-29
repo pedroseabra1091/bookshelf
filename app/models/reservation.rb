@@ -6,8 +6,8 @@ class Reservation < ApplicationRecord
   validate :user_cannot_reserve_multiple_books, on: :create
   validate :returned_on_cannot_be_in_the_past
 
-  delegate :reserved?, to: :book, prefix: :book
-  delegate :title, to: :book, prefix: :book
+  delegate :reserved?, to: :book, prefix: :book, allow_nil: true
+  delegate :title, to: :book, prefix: :book, allow_nil: true
   delegate :actively_reading?, to: :user, prefix: :user
 
   scope :ongoing, -> { where(returned_on: nil) }

@@ -1,19 +1,17 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: %i[show edit update destroy reserve]
+
   def index
     @books = Book.all.order(created_at: :asc)
   end
 
-  def show
-    @book = Book.find(params[:id])
-  end
+  def show; end
 
   def new
     @book = Book.new
   end
 
-  def edit
-    @book = Book.find(params[:id])
-  end
+  def edit; end
 
   def create
     result = CreateBook.new(book_params).perform
@@ -36,9 +34,8 @@ class BooksController < ApplicationController
     end
   end
 
-
   def update
-    result = UpdateBook.new(params[:id], book_params).perform
+    result = UpdateBook.new(@book, book_params).perform
 
     if result.success?
       respond_to do |format|
@@ -51,7 +48,6 @@ class BooksController < ApplicationController
       respond_to do |format|
         format.html do
           flash.now[:alert] = result.errors
-          @book = result.book
           render :edit, status: :unprocessable_entity
         end
         format.json do
@@ -62,13 +58,11 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    result = DestroyBook.new(params[:id]).perform
+    result = DestroyBook.new(@book).perform
 
     if result.success?
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove("book_#{params[:id]}_row")
-        end
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("book_#{@book.id}_row") }
         format.json { head :ok }
       end
     else
@@ -77,8 +71,9 @@ class BooksController < ApplicationController
   end
 
   def reserve
-    result = ReserveBook.new(params[:id], current_user.id).perform
+    result = ReserveBook.new(@book, current_user.id).perform
 
+    debugger
     if result.success?
       respond_to do |format|
         format.html do
@@ -89,7 +84,6 @@ class BooksController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          @book = result.book
           flash.now[:alert] = result&.errors
           render :show, status: :unprocessable_entity
         end
@@ -99,6 +93,10 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
   def book_params
     params.require(:book).permit(:title, :genre, :description, :cover_url)

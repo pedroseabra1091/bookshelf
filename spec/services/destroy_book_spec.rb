@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DestroyBook do
   let(:book) { create(:book) }
-  let(:destroy_book) { described_class.new(book.id).perform }
+  let(:destroy_book) { described_class.new(book).perform }
 
   describe '#perform' do
     context 'when book exists' do
