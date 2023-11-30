@@ -62,7 +62,7 @@ class BooksController < ApplicationController
 
     if result.success?
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.remove("book_#{@book.id}_row") }
+        format.turbo_stream
         format.json { head :ok }
       end
     else
