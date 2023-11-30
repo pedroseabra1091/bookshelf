@@ -5,7 +5,7 @@ en:
     create:
       success: '%{title} was successfully added to the collection!'
     update:
-      success: '%{title} was succesfully updated!'
+      success: '%{title} was successfully updated!'
     reserve:
       success: '%{title} was successfully reserved!'
       failure: '%{errors}'
