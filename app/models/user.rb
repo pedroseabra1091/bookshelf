@@ -6,6 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :validatable
 
   validates :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
 
   scope :admin_users, -> { where(is_admin: true) }
 

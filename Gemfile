@@ -56,6 +56,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.2"
   gem "ffaker", "~> 2.20.0"
   gem 'rspec-sidekiq', '~> 4.1'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
