@@ -20,7 +20,7 @@ class Book < ApplicationRecord
 
   validates :title, :cover_url, presence: true
 
-  scope :available, -> { left_joins(:reservations).where('reservations.returned_on IS NOT NULL OR reservations.book_id IS NULL') }
+  scope :available, -> { where.not(id: Reservation.where(returned_on: nil).pluck(:book_id)) }
   scope :reserved, -> { joins(:reservations).where(reservations: { returned_on: nil }) }
 
   def available?
