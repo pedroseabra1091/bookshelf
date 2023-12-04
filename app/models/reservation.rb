@@ -5,10 +5,11 @@ class Reservation < ApplicationRecord
   validate :book_cannot_be_double_reserved, on: :create
   validate :user_cannot_reserve_multiple_books, on: :create
   validate :returned_on_cannot_be_in_the_past
+  validate :returned_on_cannot_be_revised, on: :update
 
+  delegate :actively_reading?, to: :user, prefix: :user
   delegate :reserved?, to: :book, prefix: :book, allow_nil: true
   delegate :title, to: :book, prefix: :book, allow_nil: true
-  delegate :actively_reading?, to: :user, prefix: :user
 
   scope :ongoing, -> { where(returned_on: nil) }
   scope :finished, -> { where.not(returned: nil) }
@@ -31,5 +32,9 @@ class Reservation < ApplicationRecord
     if(returned_on.present? && returned_on < Date.today)
       errors.add(:returned_on, :past_date)
     end
+  end
+
+  def returned_on_cannot_be_revised
+    errors.add(:returned_on, :cannot_be_revised) if returned_on_previously_changed?
   end
 end

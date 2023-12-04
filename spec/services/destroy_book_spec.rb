@@ -15,7 +15,7 @@ RSpec.describe DestroyBook do
       end
     end
 
-    context "when doesn't exist" do
+    context "when book doesn't exist" do
       it 'does not destroy book' do
         book.destroy
         destroy_book

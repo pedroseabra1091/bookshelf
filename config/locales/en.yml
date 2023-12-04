@@ -22,4 +22,5 @@ en:
           user_has_reservations: 'You already have a ongoing reservation.'
           attributes:
             returned_on:
-              past_date: 'cannot be set in the past'
+              past_date: 'cannot be set in the past.'
+              cannot_be_revised: 'cannot be revised.'
