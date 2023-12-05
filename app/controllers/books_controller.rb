@@ -73,7 +73,6 @@ class BooksController < ApplicationController
   def reserve
     result = ReserveBook.new(@book, current_user.id).perform
 
-    debugger
     if result.success?
       respond_to do |format|
         format.html do
