@@ -5,7 +5,7 @@ Bookshelf is a streamlined web app for sharing books, purpose-built as the go-to
 ### Features
 - Reserve and return book;
 - Reservation history;
-- Books other users are reading;
+- Visualize other users active readings;
 
 ### Setup guide
 
