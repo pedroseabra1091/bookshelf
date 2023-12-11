@@ -16,7 +16,7 @@ class Book < ApplicationRecord
   has_many :reservations, dependent: :destroy
   has_one :active_reservation, -> { where(reservations: { returned_on: nil }) }, class_name: 'Reservation'
   has_many :readers, through: :reservations, source: :user
-  has_one :active_reader, :through => :active_reservation, :source => :user
+  has_one :active_reader, through: :active_reservation, source: :user
 
   validates :title, :cover_url, presence: true
 
@@ -26,12 +26,12 @@ class Book < ApplicationRecord
   def available?
     return true if reservations.blank?
 
-    reservations.last.returned_on.present?
+    reservations.order(:id).last.returned_on.present?
   end
 
   def reserved?
     return false if reservations.blank?
 
-    reservations.last.returned_on.blank?
+    reservations.order(:id).last.returned_on.blank?
   end
 end
