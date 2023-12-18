@@ -19,7 +19,7 @@ class BooksController < ApplicationController
     if result.success?
       respond_to do |format|
         format.html do
-          redirect_to(books_path, notice: I18n.t('books.create.success', title: result.book.title))
+          redirect_to(books_path, notice: I18n.t('books.create.success', title: result.book.title)
         end
         format.json { render json: { book: result.book }, status: :created }
       end
