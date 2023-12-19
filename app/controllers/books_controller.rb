@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy reserve]
 
   def index
-    @books = Book.all.order(created_at: :asc)
+    @books = Book.all.order(created_at: :desc)
   end
 
   def show; end
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
     if result.success?
       respond_to do |format|
         format.html do
-          redirect_to(books_path, notice: I18n.t('books.create.success', title: result.book.title)
+          redirect_to(books_path, notice: I18n.t('books.create.success', title: result.book.title))
         end
         format.json { render json: { book: result.book }, status: :created }
       end

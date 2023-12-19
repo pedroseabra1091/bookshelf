@@ -40,10 +40,11 @@ RSpec.describe 'Books', type: :request do
       include_context 'with logged user'
 
       context 'when params are valid' do
+        let(:title) { FFaker::Book.title }
         let(:books_params) do
           {
             book: {
-              title: FFaker::Book.title,
+              title: title,
               description: FFaker::Book.description,
               cover_url: FFaker::Book.cover
             }
@@ -54,6 +55,7 @@ RSpec.describe 'Books', type: :request do
           aggregate_failures do
             expect { post books_path(books_params) }.to change(Book, :count).by(1)
             expect(response).to have_http_status(:found)
+            expect(flash[:notice]).to eq("#{title} was successfully added to the collection")
             expect(response).to redirect_to(books_path)
           end
         end
@@ -82,11 +84,13 @@ RSpec.describe 'Books', type: :request do
             }
           }
         end
+        let(:validation_errors) { ["Title can't be blank", "Cover url can't be blank"] }
 
         it 'does not create a new book' do
           aggregate_failures do
             expect { post books_path(missing_params) }.not_to change(Book, :count)
             expect(response).to have_http_status(:unprocessable_entity)
+            expect(flash[:alert]).to eq(validation_errors)
           end
         end
       end
