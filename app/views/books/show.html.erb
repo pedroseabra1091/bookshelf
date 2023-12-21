@@ -14,11 +14,11 @@
         </div>
       <% elsif @book.available? && !current_user.actively_reading? %>
         <div class='pt-12'>
-          <%= button_to(reserve_book_path(@book), class: 'w-full') do %>
-            <form method='post'>
-              <input value="Reserve book" type="submit" class='w-full rounded-lg py-3 px-5 bg-green-600 text-white font-medium cursor-pointer' />
-            </form>
-          <% end %>
+          <%= button_to('Reserve a book',
+                        reserve_book_path(@book),
+                        class: 'w-full',
+                        method: :post,
+                        class: 'w-full rounded-lg py-3 px-5 bg-green-600 text-white font-medium cursor-pointer') %>
         </div>
       <% end %>
     </div>
