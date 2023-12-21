@@ -55,7 +55,7 @@ RSpec.describe 'Books', type: :request do
           aggregate_failures do
             expect { post books_path(books_params) }.to change(Book, :count).by(1)
             expect(response).to have_http_status(:found)
-            expect(flash[:notice]).to eq("#{title} was successfully added to the collection")
+            expect(flash[:notice]).to eq("#{title} was successfully added to the collection!")
             expect(response).to redirect_to(books_path)
           end
         end
@@ -100,6 +100,78 @@ RSpec.describe 'Books', type: :request do
       it 'redirect to login' do
         aggregate_failures do
           expect { post books_path({}) }.not_to change(Book, :count)
+          expect(response).to have_http_status(:found)
+        end
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    let!(:book) { create(:book) }
+
+    context 'when user is logged in' do
+      include_context 'with logged user'
+
+      context 'when params are valid' do
+        let(:new_title) { FFaker::Book.title }
+        let(:new_books_params) do
+          {
+            book: {
+              title: new_title,
+            }
+          }
+        end
+
+        it 'creates a new book and redirects' do
+          aggregate_failures do
+            expect { patch book_path(book, new_books_params) }.to change(Book, :count).by(0)
+            expect(response).to have_http_status(:found)
+            expect(flash[:notice]).to eq("#{new_title} was successfully updated!")
+            expect(response).to redirect_to(books_path)
+          end
+        end
+      end
+
+      context 'when params are invalid' do
+        let(:invalid_params) do
+          {
+            description: FFaker::Book.description
+          }
+        end
+
+        it 'does not create a new book' do
+          aggregate_failures do
+            expect { patch book_path(book, invalid_params) }.to raise_error(ActionController::ParameterMissing)
+          end
+        end
+      end
+
+      context 'when params are missing' do
+        let(:missing_params) do
+          {
+            book: {
+              title: nil
+            }
+          }
+        end
+        let(:validation_errors) { ["Title can't be blank"] }
+
+        it 'does not create a new book' do
+          aggregate_failures do
+            expect { patch book_path(book, missing_params) }.not_to change(book, :title)
+            expect(response).to have_http_status(:unprocessable_entity)
+            expect(flash[:alert]).to eq(validation_errors)
+          end
+        end
+      end
+    end
+
+    context "when user is not logged in" do
+      let(:new_title) { FFaker::Book.title }
+
+      it 'redirect to login' do
+        aggregate_failures do
+          expect { post books_path({ book: { title: new_title } }) }.not_to change(book, :title)
           expect(response).to have_http_status(:found)
         end
       end
