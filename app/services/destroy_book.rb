@@ -9,8 +9,6 @@ class DestroyBook
     book.destroy!
 
     Result.new({ success?: true, book: book })
-  rescue ActiveRecord::RecordNotFound
-    Result.new({ success?: false })
   end
 
   private

@@ -14,16 +14,5 @@ RSpec.describe DestroyBook do
         end
       end
     end
-
-    context "when book doesn't exist" do
-      it 'does not destroy book' do
-        book.destroy
-        destroy_book
-
-        aggregate_failures do
-          expect(destroy_book.success?).to eq(false)
-        end
-      end
-    end
   end
 end
