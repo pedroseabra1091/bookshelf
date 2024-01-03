@@ -11,8 +11,8 @@ class Reservation < ApplicationRecord
   delegate :reserved?, to: :book, prefix: :book, allow_nil: true
   delegate :title, to: :book, prefix: :book, allow_nil: true
 
-  scope :ongoing, -> { where(returned_on: nil) }
-  scope :finished, -> { where.not(returned: nil) }
+  scope :active, -> { where(returned_on: nil) }
+  scope :inactive, -> { where.not(returned: nil) }
 
   def returned?
     returned_on.present?

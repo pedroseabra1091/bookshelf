@@ -14,7 +14,7 @@ class Book < ApplicationRecord
   }
 
   has_many :reservations, dependent: :destroy
-  has_one :active_reservation, -> { where(reservations: { returned_on: nil }) }, class_name: 'Reservation'
+  has_one :active_reservation, -> { active }, class_name: 'Reservation'
   has_many :readers, through: :reservations, source: :user
   has_one :active_reader, through: :active_reservation, source: :user
 
@@ -24,14 +24,10 @@ class Book < ApplicationRecord
   scope :reserved, -> { joins(:reservations).where(reservations: { returned_on: nil }) }
 
   def available?
-    return true if reservations.blank?
-
-    reservations.order(:id).last.returned_on.present?
+    active_reservation.blank?
   end
 
   def reserved?
-    return false if reservations.blank?
-
-    reservations.order(:id).last.returned_on.blank?
+    active_reservation.present?
   end
 end
