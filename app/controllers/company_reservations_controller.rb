@@ -7,7 +7,7 @@ class CompanyReservationsController < ApplicationController
 
   def set_ongoing_reservations
     @ongoing_company_reservations = Reservation.includes(:user, :book)
-                                               .ongoing
+                                               .active
                                                .where.not(user_id: current_user.id)
   end
 end
