@@ -1,5 +1,6 @@
 class SendEndingReservationEmailJob
   include Sidekiq::Job
+  sidekiq_options queue: 'default'
 
   def perform(reserver_id, recipient_id, book_id)
     reserver = User.find(reserver_id)

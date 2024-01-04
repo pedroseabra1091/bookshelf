@@ -1,5 +1,6 @@
 class EnqueueBookProgressEmailJob
   include Sidekiq::Job
+  sidekiq_options queue: 'low'
 
   def perform
     Reservation.where.not(returned_on: nil)

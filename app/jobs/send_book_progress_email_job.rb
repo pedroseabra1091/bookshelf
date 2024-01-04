@@ -1,5 +1,6 @@
 class SendBookProgressEmailJob
   include Sidekiq::Job
+  sidekiq_options queue: 'low'
 
   def perform(reservation_id)
     reservation = Reservation.find(reservation_id)
