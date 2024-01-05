@@ -6,7 +6,6 @@ RSpec.describe UpdateBook do
 
   describe '#perform' do
     context 'when params are valid' do
-
       let(:new_title) { FFaker::Book.title }
       let(:new_description) { FFaker::Book.description }
       let(:book_params) do
