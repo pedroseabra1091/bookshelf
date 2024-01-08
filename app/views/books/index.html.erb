@@ -1,11 +1,5 @@
-<div class='grid grid-cols-4 gap-10'>
-	<div class='col-span-1'>
-		<% if current_user.active_reservation %>
-			<%= turbo_frame_tag('active_reservation_badge', src: reservation_path(current_user.active_reservation.id), target: '_top') %>
-		<% end %>
-		<%= turbo_frame_tag('company_reservations', src: company_reservations_path, target: '_top') %>
-	</div>
-	<table class="col-span-3">
+<div class='flex'>
+	<table class="mx-auto">
 		<tbody>
 			<% @books.each do |book| %>
 				<tr id='<%= "#{dom_id(book)}_row" %>' class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
@@ -18,13 +12,10 @@
 						<% end %>
 						<p class="max-w-xl"><%= truncate(book.description, length: 200) %></p>
 					</td>
-					<td>
+					<td class="px-4">
 						<ul>
 							<li>
 								<%= link_to('Edit', edit_book_path(book), class: 'hover:underline') %>
-							</li>
-							<li>
-								<%= button_to('Destroy', book_path(book), method: :delete, class: 'hover:underline') %>
 							</li>
 						</ul>
 					</td>
