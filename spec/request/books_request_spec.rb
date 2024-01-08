@@ -199,9 +199,9 @@ RSpec.describe 'Books', type: :request do
     context "when user is not logged in" do
       it 'redirect to login' do
         aggregate_failures do
-          expect { post reserve_book_path(book.id) }.to change(Reservation, :count).by(0)
-          expect(response).to redirect_to(new_user_session_path)
-          expect(response).to have_http_status(:found)
+          expect { post reserve_book_path(book.id), as: :json }.to change(Reservation, :count).by(0)
+          expect(response).to have_http_status(:unauthorized)
+          expect(JSON.parse(response.body)['error']).to eq('You need to sign in or sign up before continuing.')
         end
       end
     end
