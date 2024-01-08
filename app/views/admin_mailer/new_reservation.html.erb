@@ -1,7 +1,9 @@
 <div>
   <p class="mb-s">Hello <%= @recipient.first_name %>,</p>
-  <p>Exciting news—another book adventure is about to unfold on the Bookshelf!</p>
-  <p><span class="font-bold"><%= @reserver.full_name %></span> just snagged a reservation for <span class="font-bold"><%= @book.title %></span> on <%= @book.active_reservation.created_at %></p>
-  <p>Keep those pages turning!</p>
-  <p class="mt-s">Cheers!</p>
+  <p>A book has made its way out of the Bookshelf!</p>
+  <p>
+    <span class="font-bold"><%= @reserver.full_name %></span> started reading <span class="font-bold"><%= @book.title %></span>.
+  </p>
+  <p class="mt-s">Best,</p>
+  <p>The Bookshelf team</p>
 </div>
