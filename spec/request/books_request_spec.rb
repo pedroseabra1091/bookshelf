@@ -54,9 +54,9 @@ RSpec.describe 'Books', type: :request do
         it 'creates a new book and redirects' do
           aggregate_failures do
             expect { post books_path(books_params) }.to change(Book, :count).by(1)
+            expect(response).to redirect_to(books_path)
             expect(response).to have_http_status(:found)
             expect(flash[:notice]).to eq("#{title} was successfully added to the collection!")
-            expect(response).to redirect_to(books_path)
           end
         end
       end
@@ -125,9 +125,9 @@ RSpec.describe 'Books', type: :request do
         it 'creates a new book and redirects' do
           aggregate_failures do
             expect { patch book_path(book, new_books_params) }.to change(Book, :count).by(0)
+            expect(response).to redirect_to(books_path)
             expect(response).to have_http_status(:found)
             expect(flash[:notice]).to eq("#{new_title} was successfully updated!")
-            expect(response).to redirect_to(books_path)
           end
         end
       end
@@ -172,6 +172,35 @@ RSpec.describe 'Books', type: :request do
       it 'redirect to login' do
         aggregate_failures do
           expect { post books_path({ book: { title: new_title } }) }.not_to change(book, :title)
+          expect(response).to have_http_status(:found)
+        end
+      end
+    end
+  end
+
+  describe 'POST #reserve' do
+    let(:book) { create(:book) }
+
+    context 'when user is logged in' do
+      include_context 'with logged user'
+
+      context 'when params are valid' do
+        it 'creates a new reservation and redirects' do
+          aggregate_failures do
+            expect { post reserve_book_path(book.id) }.to change(Reservation, :count).by(1)
+            expect(response).to redirect_to(books_path)
+            expect(response).to have_http_status(:found)
+            expect(flash[:notice]).to eq("#{book.title} was successfully reserved!")
+          end
+        end
+      end
+    end
+
+    context "when user is not logged in" do
+      it 'redirect to login' do
+        aggregate_failures do
+          expect { post reserve_book_path(book.id) }.to change(Reservation, :count).by(0)
+          expect(response).to redirect_to(new_user_session_path)
           expect(response).to have_http_status(:found)
         end
       end
