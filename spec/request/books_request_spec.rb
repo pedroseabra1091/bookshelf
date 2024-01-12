@@ -5,8 +5,6 @@ RSpec.describe 'Books', type: :request do
     context 'when user is logged in' do
       include_context 'with logged user'
 
-      let(:user) { create(:user) }
-
       before { create_list(:book, 5) }
 
       it 'returns existing book collection' do

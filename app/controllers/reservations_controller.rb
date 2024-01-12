@@ -29,6 +29,8 @@ class ReservationsController < ApplicationController
   end
 
   def set_active_reservation
-    @active_reservation = current_user.active_reservation
+    @active_reservation = Reservation.find_by!(user: current_user, returned_on: nil)
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
   end
 end
