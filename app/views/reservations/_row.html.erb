@@ -16,7 +16,7 @@
       </div>
     <% else %>
       <div class='flex items-center justify-center'>
-        <%= button_to('Return book', reservation_path(reservation), method: :put, class: 'hover:underline') %>
+        <%= button_to('Return book', reservation_path(reservation), method: :put, class: 'hover:underline', 'data-turbo-frame': '_self') %>
       </div>
     <% end %>
   </div>

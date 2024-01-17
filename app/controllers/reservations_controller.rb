@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
 
     if result.success?
       respond_to do |format|
-        format.turbo_stream
+        format.html { render partial: 'reservations/row', locals: { reservation: @active_reservation } }
         format.json { render json: { reservation: result.reservation }, status: :ok }
       end
     else
