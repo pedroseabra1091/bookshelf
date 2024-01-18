@@ -1,7 +1,7 @@
-<turbo-frame id='active_reservation_badge'>
+<%= turbo_frame_tag('active_reservation_badge') do %>
   <div class='bg-violet-50 shadow h-fit p-6 mb-8 rounded'>
     <h2 class='font-bold mb-2 text-xl'>You're reading</h2>
-    <div class="bg-white shadow h-fit p-4 my-4 rounded">
+    <div class='bg-white shadow h-fit p-4 my-4 rounded'>
       <%= link_to book_path(@active_reservation.book) do %>
         <h1 class='text-xl font-bold hover:underline'><%= @active_reservation.book.title %></h1>
       <% end %>
@@ -19,4 +19,4 @@
       </div>
     </div>
   </div>
-</turbo-frame>
+<% end %>
