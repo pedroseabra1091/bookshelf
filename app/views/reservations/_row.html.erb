@@ -1,7 +1,7 @@
-<%= turbo_frame_tag("#{dom_id(reservation)}_row", target: '_top') do %>
+<%= turbo_frame_tag("#{dom_id(reservation)}_row") do %>
   <div class='grid grid-cols-3 <%= cycle('bg-violet-50', 'bg-white') %> p-3 shadow'>
     <div class='flex items-center justify-start'>
-      <%= link_to book_path(reservation.book) do %>
+      <%= link_to(book_path(reservation.book), 'data-turbo-frame': '_top') do %>
         <h1 class='text-xl font-bold hover:underline'><%= reservation.book.title %></h1>
       <% end %>
     </div>
