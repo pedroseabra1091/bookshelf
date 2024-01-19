@@ -1,5 +1,10 @@
-<div class='flex'>
-	<table class="mx-auto">
+<div class='grid grid-cols-4 gap-10'>
+	<div class='col-span-1'>
+		<% if current_user.active_reservation %>
+			<%= turbo_frame_tag('active_reservation_badge', src: reservation_path(current_user.active_reservation.id), target: '_top') %>
+		<% end %>
+	</div>
+	<table class="col-span-3">
 		<tbody>
 			<% @books.each do |book| %>
 				<tr id='<%= "#{dom_id(book)}_row" %>' class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
