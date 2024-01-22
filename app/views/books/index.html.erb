@@ -1,9 +1,9 @@
 <div class='grid grid-cols-4 gap-10'>
 	<div class='col-span-1'>
 		<% if current_user.active_reservation %>
-			<%= turbo_frame_tag('active_reservation_badge', src: reservation_path(current_user.active_reservation.id), target: '_top') %>
+			<%= turbo_frame_tag('active_reservation_badge', src: reservation_path(current_user.active_reservation.id)) %>
 		<% end %>
-		<%= turbo_frame_tag('company_reservations', src: company_reservations_path, target: '_top') %>
+		<%= turbo_frame_tag('company_reservations', src: company_reservations_path) %>
 	</div>
 	<table class="col-span-3">
 		<tbody>
