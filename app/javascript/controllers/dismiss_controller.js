@@ -4,8 +4,8 @@ export default class DismissController extends Controller {
   static targets = ['alert', 'notice']
 
   connect() {
-    this.dismiss(this.noticeTarget, 5000)
-    this.dismiss(this.alertTarget, 5000)
+    this.hasAlertTarget && this.dismiss(this.alertTarget, 5000)
+    this.hasNoticeTarget && this.dismiss(this.noticeTarget, 5000)
   }
 
   onClick(event) {
@@ -15,8 +15,10 @@ export default class DismissController extends Controller {
   }
 
   dismiss(target, delay_ms) {
-    setTimeout(() => {
-      target.classList.add('transition', 'ease-linear', 'delay-75', 'opacity-0', 'translate-x-full', 'duration-300')
-    }, delay_ms)
+    if (target) {
+      setTimeout(() => {
+        target.classList.add('transition', 'ease-linear', 'delay-75', 'opacity-0', 'translate-x-full', 'duration-300')
+      }, delay_ms)
+    }
   }
 }
