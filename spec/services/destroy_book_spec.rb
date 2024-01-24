@@ -11,6 +11,7 @@ RSpec.describe DestroyBook do
 
         aggregate_failures do
           expect(destroy_book.success?).to eq(true)
+          expect { book.reload }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
     end
