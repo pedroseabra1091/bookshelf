@@ -3,8 +3,8 @@ class EnqueueBookProgressEmailJob
   sidekiq_options queue: 'low'
 
   def perform
-    Reservation.where.not(returned_on: nil)
-               .where('created_at < ?', Date.today - 3.months)
+    Reservation.active
+               .where('created_at < ?', Date.today - 1.month)
                .pluck(:id)
                .each do |reservation_id|
       SendBookProgressEmailJob.perform_async(reservation_id)
