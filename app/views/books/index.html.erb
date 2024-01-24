@@ -8,7 +8,7 @@
 	<table class="col-span-3">
 		<tbody>
 			<% @books.each do |book| %>
-				<tr id='<%= "#{dom_id(book)}_row" %>' class='<%= cycle('bg-violet-50', 'bg-white') %> shadow'>
+				<tr id='<%= "#{dom_id(book)}_row" %>' class='<%= cycle('bg-violet-50', 'bg-white') %> shadow transition ease-in-out hover:scale-105'>
 					<td class='px-2 py-3'>
 						<%= image_tag(book.cover_url, class: 'w-40') %>
 					</td>
