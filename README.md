@@ -1,3 +1,5 @@
+![repo-banner](public/repo-banner.png)
+
 # Bookshelf
 
 Bookshelf is a streamlined web app for sharing books, purpose-built as the go-to material for Deemaze Rails training.
