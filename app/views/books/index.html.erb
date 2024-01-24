@@ -14,7 +14,7 @@
 					</td>
 					<td>
 						<%= link_to(book_path(book)) do %>
-							<h1 class='text-xl font-bold mb-3 hover:underline'><%= book.title %></h1>
+							<h1 class='text-xl font-bold py-5 hover:underline'><%= book.title %></h1>
 						<% end %>
 						<p class="max-w-xl"><%= truncate(book.description, length: 200) %></p>
 					</td>
