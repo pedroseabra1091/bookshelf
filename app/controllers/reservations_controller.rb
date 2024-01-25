@@ -6,7 +6,6 @@ class ReservationsController < ApplicationController
 
   def show; end
 
-  # TODO: Update errors to use turbo frames
   def update
     result = ReturnBook.new(@active_reservation).perform
 

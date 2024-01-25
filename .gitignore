@@ -35,3 +35,6 @@
 
 # Ignore Redis snapshots
 dump.rdb
+
+# Ignore MacOS configuration file
+.DS_Store

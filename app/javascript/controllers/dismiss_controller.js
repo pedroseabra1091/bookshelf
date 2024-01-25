@@ -15,10 +15,8 @@ export default class DismissController extends Controller {
   }
 
   dismiss(target, delay_ms) {
-    if (target) {
-      setTimeout(() => {
-        target.classList.add('transition', 'ease-linear', 'delay-75', 'opacity-0', 'translate-x-full', 'duration-300')
-      }, delay_ms)
-    }
+    setTimeout(() => {
+      target.classList.add('transition', 'ease-linear', 'delay-75', 'opacity-0', 'translate-x-full', 'duration-300')
+    }, delay_ms)
   }
 }
