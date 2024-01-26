@@ -214,7 +214,7 @@ RSpec.describe 'Books', type: :request do
       context 'when book exists' do
         it 'destroy books' do
           aggregate_failures do
-            expect { delete book_path(book.id) }.to change(Book, :count).by(-1)
+            expect { delete(book_path(book.id), as: :json) }.to change(Book, :count).by(-1)
             expect(response).to have_http_status(:ok)
           end
         end

@@ -1,7 +1,7 @@
 <%= turbo_frame_tag('company_reservations') do %>
   <div class="bg-violet-50 shadow h-fit p-8">
     <h2 class='font-bold mb-2 text-xl'>Company reading list</h2>
-    <% @ongoing_company_reservations&.each do |reservation| %>
+    <% @active_company_reservations&.each do |reservation| %>
       <div class="bg-white shadow h-fit p-4 my-4 rounded">
         <%= link_to(book_path(reservation.book), 'data-turbo-frame': '_top') do %>
           <h1 class='text-xl font-bold hover:underline'><%= reservation.book.title %></h1>

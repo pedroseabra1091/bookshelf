@@ -39,11 +39,11 @@ RSpec.describe 'Reservation', type: :request do
         let(:reservation) { create(:reservation, user: user) }
 
         it 'finishes a reservation' do
-          patch reservation_path(reservation.id)
+          patch(reservation_path(reservation.id), as: :json)
 
           aggregate_failures do
             expect(reservation.reload.returned_on).to_not eq(nil)
-            expect(response).to have_http_status(:found)
+            expect(response).to have_http_status(:ok)
           end
         end
       end
