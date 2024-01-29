@@ -24,7 +24,7 @@ RSpec.describe ReturnBook do
     context 'on a closed reservation' do
       let!(:reservation) { create(:reservation, returned_on: Date.tomorrow) }
 
-      it 'a cannot be closed twice validation is raised' do
+      it 'the returned date cannot be revised' do
         return_book
 
         aggregate_failures do
